@@ -1,4 +1,5 @@
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
+from django import forms
 
 from authapp.models import User
 
@@ -22,7 +23,7 @@ class UserRegisterForm(UserCreationForm):
         fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2')
 
     def __init__(self, *args, **kwargs):
-        super(UserRegistrationForm, self).__init__(*args, **kwargs)
+        super(UserRegisterForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs['placeholder'] = 'Введите имя пользователя'
         self.fields['email'].widget.attrs['placeholder'] = 'Введите адрес эл. почты'
         self.fields['first_name'].widget.attrs['placeholder'] = 'Введите имя'
@@ -32,7 +33,10 @@ class UserRegisterForm(UserCreationForm):
         for field_name, field in self.fields.items():
             field.wiget.attrs['class'] = 'form-control py-4'
 
+
 class UserProfileForm(UserChangeForm):
+    avatar = forms.ImageField(widget=forms.FileInput())
+
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'avatar', 'username', 'email')
