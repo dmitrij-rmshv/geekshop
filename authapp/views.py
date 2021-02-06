@@ -16,10 +16,10 @@ def login(request):
             if user and user.is_active:
                 auth.login(request, user)
                 return HttpResponseRedirect(reverse('index'))
-        else:
-            form = UserLoginForm()
-        context = {'form': form}
-    return render(request, 'authapp/login.html')
+    else:
+        form = UserLoginForm()
+    context = {'form': form}
+    return render(request, 'authapp/login.html', context)
 
 
 def register(request):
@@ -28,15 +28,15 @@ def register(request):
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('auth:login'))
-        else:
-            form = UserRegisterForm()
-        context = {'form': form}
-    return render(request, 'authapp/register.html')
+    else:
+        form = UserRegisterForm()
+    context = {'form': form}
+    return render(request, 'authapp/register.html', context)
 
 
 def logout(request):
     auth.logout(request)
-    return  HttpResponseRedirect(reverse('index'))
+    return HttpResponseRedirect(reverse('index'))
 
 
 def profile(request):
@@ -51,4 +51,4 @@ def profile(request):
         'form': form,
         'basket': Basket.objects.filter(user=request.user),
     }
-    return render(request, 'authapp/profile.html')
+    return render(request, 'authapp/profile.html', context)

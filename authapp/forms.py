@@ -14,7 +14,7 @@ class UserLoginForm(AuthenticationForm):
         self.fields['username'].widget.attrs['placeholder'] = 'Введите имя пользователя'
         self.fields['password'].widget.attrs['placeholder'] = 'Введите пароль'
         for field_name, field in self.fields.items():
-            field.wiget.attrs['class'] = 'form-control py-4'
+            field.widget.attrs['class'] = 'form-control py-4'
 
 
 class UserRegisterForm(UserCreationForm):
@@ -31,7 +31,7 @@ class UserRegisterForm(UserCreationForm):
         self.fields['password1'].widget.attrs['placeholder'] = 'Введите пароль'
         self.fields['password2'].widget.attrs['placeholder'] = 'Подтвердите пароль'
         for field_name, field in self.fields.items():
-            field.wiget.attrs['class'] = 'form-control py-4'
+            field.widget.attrs['class'] = 'form-control py-4'
 
 
 class UserProfileForm(UserChangeForm):
