@@ -4,6 +4,7 @@ from basket.models import Basket
 
 
 def basket_add(request, product_id):
+    # product = Product.objects.get(id=product_id)
     product = get_object_or_404(Product, id=product_id)
     baskets = Basket.objects.filter(user=request.user, product=product)
 
@@ -24,6 +25,7 @@ def basket_add(request, product_id):
     #     basket = baskets.first()
     #     basket.save()
     #     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 
 def basket_remove(request, id):
     basket = Basket.objects.get(id=id)
