@@ -62,8 +62,13 @@
                 </div>
             </form>
         </div>
+        <div class="col-lg-5">
         {% include 'basket/basket.html' %}
-{#        {% include '../../basket/templates/basket/basket.html' %}#}
+        </div>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/basket.js' %}"></script>
 {% endblock %}
