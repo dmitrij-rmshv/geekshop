@@ -1,10 +1,22 @@
 from django.shortcuts import render
 from mainapp.models import ProductCategory, Product
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.views.generic.list import ListView
 
 
 def index(request):
     return render(request, 'mainapp/index.html')
+
+
+# class ProductsView(ListView):
+#     model = Product
+#     template_name = 'mainapp/products.html'
+#
+#     def get_paginator():
+#         queryset = Product.objects.all
+#         per_page = 3
+#         return paginator(queryset, per_page)
+
 
 def products(request, category_id=None, page=1):
     if category_id:
