@@ -5,19 +5,6 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 def index(request):
     return render(request, 'mainapp/index.html')
-    # return render(request, 'mainapp/index.html', context)
-
-
-# def products(request, category_id=None):
-#     if category_id:
-#         products = Product.objects.filter(category_id=category_id)
-#     else:
-#         products = Product.objects.all()
-#     context = {
-#         'products': products,
-#         'categories': ProductCategory.objects.all()
-#     }
-#     return render(request, 'mainapp/products.html', context)
 
 def products(request, category_id=None, page=1):
     if category_id:
