@@ -4,6 +4,7 @@ from basket.models import Basket
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.http import JsonResponse
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 
 @login_required
@@ -19,6 +20,11 @@ def basket_add(request, product_id):
     basket.quantity += 1
     basket.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+# class BasketRemoveView(DeleteView):
+#     model = Basket
+#     template_name = 'basket/basket.html'
 
 
 @login_required
