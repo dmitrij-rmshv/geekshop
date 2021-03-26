@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from mainapp.models import ProductCategory, Product
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.views.generic.list import ListView
 
 
 def index(request):

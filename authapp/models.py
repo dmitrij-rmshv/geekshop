@@ -8,7 +8,6 @@ from django.dispatch import receiver
 
 class User(AbstractUser):
     avatar = models.ImageField(upload_to='user_avatar', blank=True)
-    # age = models.PositiveSmallIntegerField(blank=True, null=True, default=100)
     age = models.PositiveSmallIntegerField(blank=True, null=True, default=18)
 
     activation_key = models.CharField(max_length=64, blank=True, null=True)
