@@ -70,6 +70,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'mainapp.context_processors.status',
+                'authapp.context_processors.basket_count',
 
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
