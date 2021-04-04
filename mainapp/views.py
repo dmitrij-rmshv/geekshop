@@ -34,5 +34,5 @@ def products(request, category_id=None, page=1):
         products_paginator = paginator.page(page)
     except EmptyPage:
         products_paginator = paginator.page(paginator.num_pages)
-    context = {'categories': ProductCategory.objects.all(), 'products': products_paginator, 'show_pages': show_pages}
+    context = {'categories': ProductCategory.get_all(), 'products': products_paginator, 'show_pages': show_pages}
     return render(request, 'mainapp/products.html', context)

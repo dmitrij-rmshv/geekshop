@@ -1,8 +1,10 @@
 {% extends "ordersapp/order_base.html" %}
 {% load staticfiles %}
+{% load cache %}
 
 {% block content %}
     <div class="container my-4">
+        <div style="height: 100px"></div>
         {% include 'ordersapp/includes/inc_order_summary.html' %}
         <div class="order_form">
             <form action="" method="post">
@@ -30,14 +32,22 @@
                                             {{ hidden }}
                                         {% endfor %}
                                     {% endif %}
+
                                     {{ field.errors.as_ul }}
+
                                     {% if field.name != 'price' %}
-                                        {{ field }}
+                                        {% if field.name == 'product' %}
+                                            {% cache 3600 odreritemform_product field.value %}
+                                                {{ field }}
+                                            {% endcache %}
+                                        {% else %}
+                                            {{ field }}
+                                        {% endif %}
                                     {% else %}
                                         {% if field.value %}
                                             <span class="orderitems-{{ forloop.parentloop.counter0 }}-price">
-                                        {{ field.value }}
-                                    </span> руб
+                                                {{ field.value }}
+                                            </span> руб
                                         {% endif %}
                                     {% endif %}
                                 </td>

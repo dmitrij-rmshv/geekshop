@@ -30,6 +30,7 @@ from django.utils.timezone import now
 
 from authapp.models import User
 from mainapp.models import Product
+from django.utils.functional import cached_property
 
 
 class BasketQuerySet(models.QuerySet):
@@ -60,16 +61,24 @@ class Basket(models.Model):
     def __str__(self):
         return f'Корзина для {self.user.username} | Продукт {self.product.name}'
 
+    @cached_property
+    def get_items_cached(self):
+        return self.user.basket.select_related()
+
     def sum(self):
         return self.quantity * self.product.price
 
     def total_quantity(self):
-        baskets = Basket.objects.filter(user=self.user)
+        # baskets = Basket.objects.filter(user=self.user)
+        # return sum(basket.quantity for basket in baskets)
+        baskets = self.get_items_cached
         return sum(basket.quantity for basket in baskets)
 
     def total_sum(self):
-        baskets = Basket.objects.filter(user=self.user)
-        return sum(basket.sum() for basket in baskets)
+        # baskets = Basket.objects.filter(user=self.user)
+        # return sum(basket.sum() for basket in baskets)
+        baskets = self.get_items_cached
+        return sum(basket.sum for basket in baskets)
 
     def delete(self, using=None, keep_parents=False):
         self.product.quantity += self.quantity
