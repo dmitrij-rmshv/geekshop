@@ -3,6 +3,8 @@ from django import forms
 from authapp.forms import UserRegisterForm, UserProfileForm
 from authapp.models import User
 
+from mainapp.models import ProductCategory
+
 
 class UserAdminRegisterForm(UserRegisterForm):
     avatar = forms.ImageField(widget=forms.FileInput())
@@ -22,3 +24,13 @@ class UserAdminProfileForm(UserProfileForm):
         super(UserAdminProfileForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs['readonly'] = False
         self.fields['email'].widget.attrs['readonly'] = False
+
+
+class ProductCategoryEditForm(forms.ModelForm):
+    discount = forms.IntegerField(label='скидка', required=False, \
+                                  min_value=0, max_value=90, initial=0)
+
+    class Meta:
+        model = ProductCategory
+        # fields = '__all__'
+        exclude = ()
