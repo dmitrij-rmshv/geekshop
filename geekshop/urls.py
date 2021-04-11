@@ -33,7 +33,7 @@ urlpatterns = [
     re_path(r'^order/', include('ordersapp.urls', namespace='order')),
 ]
 
-if settings.DEBUG:
+if settings.DEBUG or settings.TESTING_MODE:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
